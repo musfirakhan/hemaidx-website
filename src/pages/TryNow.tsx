@@ -19,7 +19,7 @@ const TryNow = () => {
                 <h2 className="text-2xl font-semibold mb-4">Virtual Staining</h2>
                 <p className="text-gray-600">
                   Transform unstained blood smear images into high-quality, virtually stained samples 
-                  using advanced AI technology.
+                  using Generative AI.
                 </p>
               </div>
             </Link>
