@@ -1,29 +1,30 @@
 
-# import subprocess
-# import sys
+import subprocess
+import sys
 
-# def install_packages(packages):
-#     """Function to install packages."""
-#     for package in packages:
-#         subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+def install_packages(packages):
+    """Function to install packages."""
+    for package in packages:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
-# packages = [
-#     'fastapi',
-#     'uvicorn',
-#     'torch',
-#     'onnxruntime',
-#     'torchvision',
-#     'numpy',
-#     'opencv-python',
-#     'rembg',
-#     'scikit-learn',
-#     'Pillow',
-#     'tqdm',
-#     'scipy',
-#     'python-multipart'
-# ]
+packages = [
+    'fastapi',
+    'uvicorn',
+    'torch',
+    'onnxruntime',
+    'torchvision',
+    'numpy',
+    'opencv-python',
+    'rembg',
+    'scikit-learn',
+    'Pillow',
+    'tqdm',
+    'scipy',
+    'python-multipart'
+]
 
-# install_packages(packages)
+install_packages(packages)
+from torchvision.ops import nms
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -59,8 +60,8 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 # Load ONNX models with GPU support
 providers = ['CUDAExecutionProvider', 'CPUExecutionProvider']
-model_classify_path = r"C:\Users\Asad\Desktop\hemaidx_mus\project\project\public\models\model.onnx"
-model_stain_path = r"C:\Users\Asad\Desktop\hemaidx_mus\project\project\public\models\pix2pixhd_generator.onnx"
+model_classify_path = r"C:\semester\sem7\hemaidx-website\project\model.onnx"
+model_stain_path = r"C:\semester\sem7\hemaidx-website\project\pix2pixhd_generator.onnx"
 sess_classify = ort.InferenceSession(model_classify_path, providers=providers)
 sess_stain = ort.InferenceSession(model_stain_path, providers=providers)
 
@@ -277,32 +278,37 @@ async def classify_image(file: UploadFile = File(...)):
         with open(image_path, "wb") as f:
             f.write(file.file.read())
 
-        # Open image
         im = Image.open(image_path).convert('RGB')
-        im = im.resize((640, 640))  
-        im_data = ToTensor()(im)[None]
-
+        im = im.resize((640, 640))
+        im_data = ToTensor()(im)[None]  # Add batch dimension
+        print(f"Processing: {image_path}, Shape: {im_data.shape}")
         size = torch.tensor([[640, 640]])
-        output = sess_classify.run(None, {'images': im_data.numpy(), "orig_target_sizes": size.numpy()})
-
-        labels, boxes, scores = map(np.array, output)
-
-        labels = labels.astype(int)
-        scores = scores.astype(float)
-        boxes = boxes.astype(float)
-
+        output = sess_classify.run(
+            output_names=None,
+            input_feed={'images': im_data.numpy(), "orig_target_sizes": size.numpy()}
+        )
+        labels, boxes, scores = output
+        thrh = 0.5
+        scores = torch.tensor(scores[0]) 
+        boxes = torch.tensor(boxes[0])
+        labels = torch.tensor(labels[0])
+        mask = scores > thrh
+        boxes = boxes[mask]
+        scores = scores[mask]
+        labels = labels[mask]
+        # Apply cross-class NMS
+        keep = nms(boxes, scores, 0.4) 
+        boxes = boxes[keep]
+        scores = scores[keep]
+        labels = labels[keep]
         draw = ImageDraw.Draw(im)
-        thrh = 0.5  
         font = ImageFont.load_default()
 
-        for i in range(im_data.shape[0]):  
-            scr = scores[i]
-            lab = labels[i][scr > thrh]  
-            box = boxes[i][scr > thrh]  
+        for i, (box, score, label) in enumerate(zip(boxes, scores, labels)):
 
-            for l, b in zip(lab, box):
-                draw.rectangle(list(b), outline='red', width=2)
-                draw.text((b[0], b[1] - 10), text=str(classes[int(l.item())]), fill='blue', font=font)
+            draw.rectangle(list(box), outline='red', width=2)
+            label_text = f"{classes[int(label.item())]}: {score.item():.2f}"
+            draw.text((box[0], box[1] - 10), text=label_text, fill='blue', font=font)
 
         output_path = os.path.join(output_dir, f"processed_{file.filename}")
         im.save(output_path)
