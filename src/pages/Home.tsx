@@ -25,32 +25,68 @@ const Home = () => {
 
         {/* Main Content */}
         <div className="max-w-6xl mx-auto pb-20">
-          <div className="bg-white rounded-lg shadow-xl p-12 mb-20">
-            <div className="flex items-start justify-between gap-12">
-              <div className="flex-1">
-                <h2 className="text-4xl font-bold text-gray-800 mb-6">
-                AI-Powered Blood Cell Identification for Precision Diagnosis
-                </h2>
-                <p className="text-xl text-gray-600 mb-8">
-                AI-driven hematology solution revolutionizes 
-                blood cell identification, providing rapid and accurate detection 
-                of various blood disorders. Using AI technology,
-                 we transform label-free blood smear images into high-contrast, 
-                 stained images, and classfify different types of White Blood Cells - eliminating the need for chemical reagents 
-                 while enhancing diagnostic precision. 
-                </p>
-              </div>
-              <div className="flex-1">
-                <div className="relative">
-                <video 
-              src="/data/video.mov" 
-              className="w-full h-full object-cover rounded-lg"
-              autoPlay 
-              loop 
-              muted 
-              playsInline
-            />
+          <div className="overflow-hidden rounded-lg">
+            <div className="group relative cursor-pointer">
+              <div className="flex transition-transform duration-500 ease-in-out transform group-hover:-translate-x-full">
+                {/* First Section */}
+                <div className="min-w-full bg-white rounded-lg shadow-xl p-12">
+                  <div className="flex items-start justify-between gap-12">
+                    <div className="flex-1">
+                      <h2 className="text-4xl font-bold text-gray-800 mb-6">
+                        AI-Powered Blood Cell Identification for Precision Diagnosis
+                      </h2>
+                      <p className="text-xl text-gray-600 mb-8">
+                        AI-driven hematology solution revolutionizes 
+                        blood cell identification, providing rapid detection 
+                        of various blood disorders. Using AI technology,
+                        we transform stained blood smear images into classified images for 
+                        different types of White Blood Cells enhancing diagnostic precision. 
+                      </p>
+                    </div>
+                    <div className="flex-1">
+                      <video 
+                        src="/data/video.mov" 
+                        className="w-full h-[300px] object-cover rounded-lg"
+                        autoPlay 
+                        loop 
+                        muted 
+                        playsInline
+                      />
+                    </div>
+                  </div>
+                </div>
 
+                {/* Second Section */}
+                <div className="min-w-full absolute top-0 left-full">
+                  <div className="bg-white rounded-lg shadow-xl p-12">
+                    <div className="flex items-start justify-between gap-12">
+                      <div className="flex-1">
+                        <h2 className="text-4xl font-bold text-gray-800 mb-6">
+                          Virtual Staining of Unstained Blood Smear Images
+                        </h2>
+                        <p className="text-xl text-gray-600 mb-8">
+                        This advanced solution eliminates the need for traditional staining procedures, 
+                        which are often time-consuming and costly. Instead, we provide an efficient, 
+                        reagent-free method for analyzing blood samples. 
+                        This not only enhances diagnostic precision but also 
+                         reduces the manual workload involved in hematological analysis, 
+                         making the process faster, safer, and more scalable for clinical use.
+
+
+                        </p>
+                      </div>
+                      <div className="flex-1">
+                        <video 
+                          src="/data/proj.mov" 
+                          className="w-full h-[300px] object-cover rounded-lg"
+                          autoPlay 
+                          loop 
+                          muted 
+                          playsInline
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
