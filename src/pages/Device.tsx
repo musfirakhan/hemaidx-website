@@ -18,12 +18,14 @@ const Device = () => {
         </div>
 
         {/* Main Device Showcase */}
-        <div className="bg-white rounded-lg shadow-xl p-12 mb-16 min-h-[600px] flex flex-col">
-          <h2 className="text-4xl font-bold text-gray-800 mb-6">
-            Real-time Analysis & Classification
-          </h2>
-          <div className="flex-grow flex items-center justify-center">
-            {/* Video will go here */}
+        <div className="max-w-[1100px] mx-auto">
+          <div className="bg-white rounded-lg shadow-xl p-12 mb-14 min-h-[600px] flex flex-col">
+            <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              Real-time Analysis & Classification
+            </h2>
+            <div className="flex-grow flex items-center justify-center">
+              {/* Video will go here */}
+            </div>
           </div>
         </div>
 
