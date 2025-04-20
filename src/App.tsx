@@ -7,6 +7,7 @@ import Contact from './pages/Contact';
 import VirtualStaining from './pages/VirtualStaining';
 import Classification from './pages/Classification';
 import TryNow from './pages/TryNow';
+import Device from './pages/Device';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/device" element={<Device />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/try-now" element={<TryNow />} />

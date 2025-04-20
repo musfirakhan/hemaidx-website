@@ -15,6 +15,14 @@ const Navbar = () => {
             Home
           </NavLink>
           <NavLink 
+            to="/device" 
+            className={({ isActive }) => 
+              `text-gray-800 hover:text-secondary transition-colors ${isActive ? 'font-semibold text-secondary' : ''}`
+            }
+          >
+            Device
+          </NavLink>
+          <NavLink 
             to="/about" 
             className={({ isActive }) => 
               `text-gray-800 hover:text-secondary transition-colors ${isActive ? 'font-semibold text-secondary' : ''}`
