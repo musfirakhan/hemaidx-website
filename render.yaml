@@ -11,8 +11,8 @@ services:
   - type: web
     name: frontend-app
     env: node
-    buildCommand: npm install && npm run build
-    startCommand: npm run
+    buildCommand: npm install 
+    startCommand: npm run dev
     staticPublishPath: ./dist
     envVars:
       - key: PORT

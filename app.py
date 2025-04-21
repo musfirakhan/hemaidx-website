@@ -60,8 +60,8 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 # Load ONNX models with GPU support
 providers = ['CUDAExecutionProvider', 'CPUExecutionProvider']
-model_classify_path = r"C:\semester\sem7\hemaidx-website\project\model.onnx"
-model_stain_path = r"C:\semester\sem7\hemaidx-website\project\pix2pixhd_generator.onnx"
+model_classify_path = r"C:\Users\Asad\Desktop\hemaidx-website-project\model.onnx"
+model_stain_path = r"C:\Users\Asad\Desktop\hemaidx-website-project\pix2pixhd_generator.onnx"
 sess_classify = ort.InferenceSession(model_classify_path, providers=providers)
 sess_stain = ort.InferenceSession(model_stain_path, providers=providers)
 
