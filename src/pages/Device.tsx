@@ -11,23 +11,27 @@ const Device = () => {
             Smart Microscopy Device
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-           An AI-integrated device featuring a microcontroller-based unit that can be seamlessly attached 
-               to a conventional microscope, enabling real-time blood slide 
-               analysis through automated staining and cell classification.
+            An AI-integrated device featuring a microcontroller-based unit that can be seamlessly attached
+            to a conventional microscope, enabling real-time blood slide
+            analysis through automated staining and cell classification.
           </p>
         </div>
 
-        {/* Main Device Showcase */}
-        <div className="max-w-[1100px] mx-auto">
-          <div className="bg-white rounded-lg shadow-xl p-12 mb-14 min-h-[600px] flex flex-col">
-            <h2 className="text-4xl font-bold text-gray-800 mb-6">
-              Real-time Analysis & Classification
-            </h2>
-            <div className="flex-grow flex items-center justify-center">
-              {/* Video will go here */}
+      {/* Main Device Showcase */}
+      <div className="max-w-[1100px] mx-auto">
+        <div className="bg-white rounded-lg shadow-xl p-12 mb-14 min-h-[800px] flex flex-col">
+          <h2 className="text-4xl font-bold text-gray-800 mb-6">
+            Real-time Analysis & Classification
+          </h2>
+          {}
+          <div className="flex-1 min-h-[500px]"> {}
+            {/* Black box  */}
+            <div className="w-full h-[600px] bg-black text-white flex items-center justify-center">
+              <p className="text-xl font-bold"></p>
             </div>
           </div>
         </div>
+      </div>
 
         {/* Feature Cards - Centered at Bottom */}
         <div className="max-w-2xl mx-auto">
@@ -61,4 +65,4 @@ const Device = () => {
   );
 };
 
-export default Device; 
+export default Device;

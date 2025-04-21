@@ -307,7 +307,7 @@ async def classify_image(file: UploadFile = File(...)):
         for i, (box, score, label) in enumerate(zip(boxes, scores, labels)):
 
             draw.rectangle(list(box), outline='red', width=2)
-            label_text = f"{classes[int(label.item())]}: {score.item():.2f}"
+            label_text = f"{classes[int(label.item())]}"
             draw.text((box[0], box[1] - 10), text=label_text, fill='blue', font=font)
 
         output_path = os.path.join(output_dir, f"processed_{file.filename}")
