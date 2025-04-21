@@ -22,9 +22,9 @@ const Device = () => {
             <h2 className="text-4xl font-bold text-gray-800 mb-6">
               Real-time Staining & Classification
             </h2>
-            <div className="flex-1 min-h-[500px]">
+            <div className="flex-1 min-h-[500px] flex justify-center items-center">
               {/* Video container */}
-              <div className="w-full h-[600px] overflow-hidden rounded-lg">
+              <div className="w-[70%] h-[600px] overflow-hidden rounded-lg">
                 <video
                   className="w-full h-full object-cover"
                   autoPlay
