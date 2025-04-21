@@ -279,6 +279,7 @@ async def classify_image(file: UploadFile = File(...)):
             f.write(file.file.read())
 
         im = Image.open(image_path).convert('RGB')
+        width, height =im.size
         im = im.resize((640, 640))
         im_data = ToTensor()(im)[None]  # Add batch dimension
         print(f"Processing: {image_path}, Shape: {im_data.shape}")
@@ -311,6 +312,7 @@ async def classify_image(file: UploadFile = File(...)):
             draw.text((box[0], box[1] - 10), text=label_text, fill='blue', font=font)
 
         output_path = os.path.join(output_dir, f"processed_{file.filename}")
+        im = im.resize((width, height))
         im.save(output_path)
 
         return FileResponse(output_path, media_type="image/jpg", filename=f"processed_{file.filename}")
